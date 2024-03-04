@@ -1,21 +1,20 @@
 import React, {useState} from 'react'
 import axios from "axios"
+import {useParams} from "react-router-dom"
 
 const ShowBookById = () => {
 
 const [loading, setLoading] = useState(false);
-const [bookId, setBookId] = useState("");
 const [book, setBook] = useState([]);
+const {id} = useParams();
 
-const handleSubmit=()=>{
+useEffect(()=>{
 
 setLoading(true);
 console.log(loading);
-axios.get(`http://localhost:5000/book/bookById/${setBookId}`)
+axios.get(`http://localhost:5000/book/bookById/${id}`)
 .then((response)=>{
     setBook(response.data);
-    console.log(response.data);
-
     setLoading(false);
     console.log(book);
 })
@@ -23,30 +22,12 @@ axios.get(`http://localhost:5000/book/bookById/${setBookId}`)
     console.log(error);
     setLoading(false);
 })
+},[]);
 
-}
-
-    const handleChange = (e) => {
-        setBookId(e.target.value);
-      };
-    
   return (
-
 <>
-
-<form onSubmit={handleSubmit}>
-      <label>
-        Enter Book ID:
-        <input
-          type="text"
-          value={bookId}
-          onChange={handleChange}
-          placeholder="Enter book ID"
-        />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
-    </form></>
-
+<button >Get Book</button>
+</>
   )
 }
 

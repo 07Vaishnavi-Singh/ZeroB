@@ -1,12 +1,16 @@
 import React, {useState} from 'react'
 import axios from "axios"
+import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+// import Spinner 
+import {Link} from "react-router-dom";
 
 const ShowBooks = () => {
 
 const [loading, setLoading] = useState(false);
 const [books, setBooks] = useState([]);
+const [showType, setShowType] = useState('table');
 
-const handleSubmit = async()=>{
+useEffect(()=>{
 setLoading(true);
     axios.get("http://localhost:5000/book/books")
     .then((response)=>{
@@ -17,15 +21,25 @@ setLoading(true);
         console.log(error);
         setLoading(false);
     })
-}
+},[])
 
   return (
     
+<div>
 
-<button onClick={handleSubmit}>
-    Get Books
-</button>
+<div>
+  <button onClick={()=>{setShowType('table')}}>Table</button>
+  <button onClick={()=>{setShowType('card')}} >Card</button>
+</div>
 
+<div >
+        <h1 >Books List</h1>
+        <Link to='/book/CreateBook'>
+          <MdOutlineAddBox className='text-sky-800 text-4xl' />
+        </Link>
+      </div>
+
+</div>
 
   )
 }

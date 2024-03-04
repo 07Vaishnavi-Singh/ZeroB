@@ -12,8 +12,9 @@ const App = () => {
 
 <Route path='/book/deleteBook' element={<DeleteBook/>}/>
 <Route path='/book/EditBook' element={<EditBook/>} />
-<Route path='/book/ShowBookById' element={<ShowBookById/>} />
+<Route path='/book/ShowBookById/:id' element={<ShowBookById/>} />
 <Route path='/book/ShowBooks' element={<ShowBooks/>} />
+<Route path='/book/CreateBook' element={<CreateBook/>} />
 
 </Routes>
 
