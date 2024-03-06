@@ -1,4 +1,4 @@
-// some fo the elemts of the book are not gettng created
+// working fine
 import React, {useState} from 'react'
 import Spinner from "../components/Spinner.jsx";
 import BackButton from "../components/BackButton.jsx";
@@ -6,23 +6,23 @@ import axios from "axios";
 
 const CreateBook = () => {
 
-const [author, setAuthor] = useState("");
-const [name, setName] = useState("");
-const [publishYear, setPublishYear] = useState("");
+const [Author, setAuthor] = useState("");
+const [Name, setName] = useState("");
+const [PublishYear, setPublishYear] = useState("");
 const [loading, setLoading] = useState(false);
 
 const handleSubmit = ()=>{
   const data = {
-    name,
-    author,
-    publishYear
-  }
+    Name,
+    Author,
+    PublishYear
+  } 
 setLoading(true);
-console.log(data);
+console.log("DATA",data);
 axios.post("http://localhost:5000/book/postBook",data)
 .then((response)=>{
   setLoading(false);
-  console.log(" Book Successfully Added");
+  console.log("Book Successfully Added");
 })
 .catch((error)=>{
   console.log(error);
@@ -41,7 +41,7 @@ axios.post("http://localhost:5000/book/postBook",data)
 <div>
   <label > Author</label>
   <input type="text" 
-  value={author}
+  value={Author}
   onChange = {(e)=> setAuthor(e.target.value)}
   />
 </div>
@@ -49,7 +49,7 @@ axios.post("http://localhost:5000/book/postBook",data)
 <div>
   <label > Name</label>
   <input type="text" 
-  value={name}
+  value={Name}
   onChange = {(e)=> setName(e.target.value)}
   />
 </div>
@@ -57,7 +57,7 @@ axios.post("http://localhost:5000/book/postBook",data)
 <div>
   <label > Publish Year </label>
   <input type="text" 
-  value={publishYear}
+  value={PublishYear}
   onChange = {(e)=> setPublishYear(e.target.value)}
   />
 </div>
