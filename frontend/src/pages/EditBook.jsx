@@ -1,31 +1,27 @@
 // edit not happening
-
 import React, { useEffect, useState } from 'react'
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import Spinner from "../components/Spinner.jsx" ;
-
 
 const EditBook = () => {
 
 const [loading, setLoading] = useState(false);
 const {id} = useParams();
 const [book, setBook] = useState([])
-const [author, setAuthor] = useState("");
-const [name, setName] = useState("");
-const [publishYear, setPublishYear] = useState("");
+const [Author, setAuthor] = useState("");
+const [Name, setName] = useState("");
+const [PublishYear, setPublishYear] = useState("");
 
 useEffect(()=>{
 setLoading(true);
 axios.get(`http://localhost:5000/book/bookById/${id}`)
 .then((response)=>{
-  setBook(response.data);
+setBook(response.data);
 setAuthor(response.data.Author);
-setAuthor(response.data.Name);
-setAuthor(response.data.PublishYear);
-
-
-  setLoading(false);
+setName(response.data.Name);
+setPublishYear(response.data.PublishYear);
+setLoading(false);
 })
 .catch((error)=>{
 console.log(error);
@@ -34,13 +30,12 @@ setLoading(false);
 
 },[]);
 
-
 const handleSubmit =()=>{
 setLoading(true);
 const data = {
-  name,
-  author,
-  publishYear
+  Name,
+  Author,
+  PublishYear
 }
 axios.put(`http://localhost:5000/book/updateBook/${id}`,data)
 .then((response)=>{
@@ -53,7 +48,6 @@ axios.put(`http://localhost:5000/book/updateBook/${id}`,data)
 console.log(error);
 setLoading(false);
 })
-
 
 }
 
@@ -68,7 +62,7 @@ setLoading(false);
       </label>
       <input 
       type="text"
-      value={author}
+      value={Author}
       onChange = { (e)=> setAuthor(e.target.value)}
       />
     </div>
@@ -78,7 +72,7 @@ setLoading(false);
       </label>
       <input 
       type="text"
-      value={name}
+      value={Name}
       onChange = { (e)=> setName(e.target.value)}
       />
     </div>
@@ -88,7 +82,7 @@ setLoading(false);
       </label>
       <input 
       type="text"
-      value= {publishYear}
+      value= {PublishYear}
       onChange = { (e)=> setPublishYear(e.target.value)}
       />
     </div>
